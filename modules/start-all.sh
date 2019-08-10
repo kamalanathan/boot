@@ -34,6 +34,7 @@ scp ./DemandSupplyFE/target/*.jar kamal@slave02:/home/kamal/Documents/workspace/
 scp ./DemandSupplyFE/target/*.jar kamal@slave04:/home/kamal/Documents/workspace/DemandSupplyFE
 
 java -jar ./eurekaserver/target/eurekaserver-0.0.1-SNAPSHOT.jar &
+sleep 1m
 java -jar ./cloud-config/target/cloud-config-0.0.1-SNAPSHOT.jar &
 sleep 1m
 java -jar ./matcher/target/matcher-0.0.1-SNAPSHOT.jar &
