@@ -1,0 +1,12 @@
+cd ./eurekaserver
+mvn clean
+cd ./cloud-config
+mvn clean
+cd ./matcher
+mvn clean
+cd ./DemandSupplyFE
+mvn clean
+cd ./profiles
+mvn clean
+cd ./zuulfilter
+mvn clean
