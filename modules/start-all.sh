@@ -26,9 +26,9 @@ curl -X POST http://master:6072/actuator/shutdown
 #eurekaserver
 curl -X POST http://master:6070/actuator/shutdown
 
-
+cd ..
 scp ./profiles/target/*.jar kamal@slave02:/home/kamal/Documents/workspace/profiles
-scp ./profiles/target/*.jar kamal@slave04:/home/kamal/Documents/workspace/profiles
+scp ./profiles/target/*.jar kamal@slave04:/home/kamal/Documents/workspace/profiles 
 
 scp ./DemandSupplyFE/target/*.jar kamal@slave02:/home/kamal/Documents/workspace/DemandSupplyFE
 scp ./DemandSupplyFE/target/*.jar kamal@slave04:/home/kamal/Documents/workspace/DemandSupplyFE
