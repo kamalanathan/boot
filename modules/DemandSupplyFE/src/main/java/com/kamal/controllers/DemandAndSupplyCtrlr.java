@@ -28,7 +28,7 @@ public class DemandAndSupplyCtrlr {
 	@Autowired
 	private ProfilesServiceProxy profProxy;
 
-	@Value("{block.demands}")
+	@Value(value = "${block.demands}")
 	private boolean blockDemand = false;
 
 	@PostMapping(path = "/demand")

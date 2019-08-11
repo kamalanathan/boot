@@ -1,1 +1,1 @@
-RABBIT_URI=amqp://admin:admin@master java -jar zipkin.jar
+RABBIT_URI=amqp://admin:admin@master java -jar zipkin.jar &
