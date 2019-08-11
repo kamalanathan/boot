@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
-import com.kamal.configs.KamalKafaConfiguration;
-import com.kamal.configs.PropertyConfiguration;
 import com.kamal.domain.Demand;
 import com.kamal.domain.Profile;
 import com.kamal.domain.Supply;
 import com.kamal.kafka.Producer;
 import com.kamal.service.ProfilesServiceProxy;
 
+@RefreshScope
 @RestController
 @RequestMapping(path = "/cars")
 public class DemandAndSupplyCtrlr {
