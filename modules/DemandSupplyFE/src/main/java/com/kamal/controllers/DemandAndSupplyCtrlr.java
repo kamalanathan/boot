@@ -31,13 +31,13 @@ public class DemandAndSupplyCtrlr {
 	@Autowired
 	private ProfilesServiceProxy profProxy;
 
-	@Autowired
-	private PropertyConfiguration propertyConfiguration;
+	@Value("${block.demands}")
+	private boolean propertyConfiguration;
 
 	@PostMapping(path = "/demand")
 	public String postDemand(@RequestBody Demand demand) {
 		String retValue = null;
-		if (!propertyConfiguration.isBlockDemand()) {
+		if (!propertyConfiguration) {
 			long id = demand.getRider_id();
 			Map<String, Long> uriVariables = new HashMap<String, Long>();
 			uriVariables.put("id", id);
@@ -65,7 +65,7 @@ public class DemandAndSupplyCtrlr {
 	@PostMapping(path = "/demandfeign")
 	public String postDemandFeign(@RequestBody Demand demand) {
 		String retValue = null;
-		if (!propertyConfiguration.isBlockDemand()) {
+		if (!propertyConfiguration) {
 			long id = demand.getRider_id();
 			if (profProxy.findprofile(id) == null) {
 				retValue = "user id <" + demand.getRider_id() + "> not found";
