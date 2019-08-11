@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
+import com.kamal.configs.PropertyConfiguration;
 import com.kamal.domain.Demand;
 import com.kamal.domain.Profile;
 import com.kamal.domain.Supply;
 import com.kamal.kafka.Producer;
 import com.kamal.service.ProfilesServiceProxy;
 
-@RefreshScope
 @RestController
 @RequestMapping(path = "/cars")
 public class DemandAndSupplyCtrlr {
@@ -30,13 +28,13 @@ public class DemandAndSupplyCtrlr {
 	@Autowired
 	private ProfilesServiceProxy profProxy;
 
-	@Value("${block.demands}")
-	private boolean propertyConfiguration;
+	@Autowired
+	PropertyConfiguration propertyConfiguration;
 
 	@PostMapping(path = "/demand")
 	public String postDemand(@RequestBody Demand demand) {
 		String retValue = null;
-		if (!propertyConfiguration) {
+		if (!propertyConfiguration.isPropertyConfiguration()) {
 			long id = demand.getRider_id();
 			Map<String, Long> uriVariables = new HashMap<String, Long>();
 			uriVariables.put("id", id);
@@ -64,7 +62,7 @@ public class DemandAndSupplyCtrlr {
 	@PostMapping(path = "/demandfeign")
 	public String postDemandFeign(@RequestBody Demand demand) {
 		String retValue = null;
-		if (!propertyConfiguration) {
+		if (!propertyConfiguration.isPropertyConfiguration()) {
 			long id = demand.getRider_id();
 			if (profProxy.findprofile(id) == null) {
 				retValue = "user id <" + demand.getRider_id() + "> not found";
