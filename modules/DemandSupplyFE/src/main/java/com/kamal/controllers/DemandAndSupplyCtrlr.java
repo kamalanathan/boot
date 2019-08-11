@@ -73,6 +73,8 @@ public class DemandAndSupplyCtrlr {
 				producer.sendDemandMessage(gson.toJson(demand));
 				retValue = "posted-demand";
 			}
+		} else {
+			retValue = "Sorry request cannot be posted at this moment";
 		}
 		return retValue;
 	}
