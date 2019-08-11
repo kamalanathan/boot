@@ -1,4 +1,4 @@
-package com.kamal.kafka;
+package com.kamal.configs;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,10 +13,13 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
 @Configuration
-public class KakfaConfiguration {
+public class KamalKafaConfiguration {
 
 	@Value(value = "${spring.kafka.bootstrap-servers}")
 	private String bootstrapAddress;
+
+	@Value(value = "${block.demands}")
+	private boolean blockDemand;
 
 	@Bean
 	public ProducerFactory<String, String> producerFactory() {
@@ -36,4 +39,8 @@ public class KakfaConfiguration {
 		return new KafkaTemplate<String, String>(producerFactory());
 	}
 
+	@Bean
+	public boolean isBlockDemand() {
+		return blockDemand;
+	}
 }

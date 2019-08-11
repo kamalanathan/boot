@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
+import com.kamal.configs.KamalKafaConfiguration;
 import com.kamal.domain.Demand;
 import com.kamal.domain.Profile;
 import com.kamal.domain.Supply;
@@ -28,13 +30,13 @@ public class DemandAndSupplyCtrlr {
 	@Autowired
 	private ProfilesServiceProxy profProxy;
 
-	@Value(value = "${block.demands}")
-	private boolean blockDemand = false;
+	@Autowired
+	private KamalKafaConfiguration kafkaConfig;
 
 	@PostMapping(path = "/demand")
 	public String postDemand(@RequestBody Demand demand) {
 		String retValue = null;
-		if (!blockDemand) {
+		if (!kafkaConfig.isBlockDemand()) {
 			long id = demand.getRider_id();
 			Map<String, Long> uriVariables = new HashMap<String, Long>();
 			uriVariables.put("id", id);
@@ -62,13 +64,15 @@ public class DemandAndSupplyCtrlr {
 	@PostMapping(path = "/demandfeign")
 	public String postDemandFeign(@RequestBody Demand demand) {
 		String retValue = null;
-		long id = demand.getRider_id();
-		if (profProxy.findprofile(id) == null) {
-			retValue = "user id <" + demand.getRider_id() + "> not found";
-		} else {
-			Gson gson = new Gson();
-			producer.sendDemandMessage(gson.toJson(demand));
-			retValue = "posted-demand";
+		if (!kafkaConfig.isBlockDemand()) {
+			long id = demand.getRider_id();
+			if (profProxy.findprofile(id) == null) {
+				retValue = "user id <" + demand.getRider_id() + "> not found";
+			} else {
+				Gson gson = new Gson();
+				producer.sendDemandMessage(gson.toJson(demand));
+				retValue = "posted-demand";
+			}
 		}
 		return retValue;
 	}
