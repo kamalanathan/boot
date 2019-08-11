@@ -18,9 +18,6 @@ public class KamalKafaConfiguration {
 	@Value(value = "${spring.kafka.bootstrap-servers}")
 	private String bootstrapAddress;
 
-	@Value(value = "${block.demands}")
-	private boolean blockDemand;
-
 	@Bean
 	public ProducerFactory<String, String> producerFactory() {
 		Map<String, Object> config = new HashMap<String, Object>();
@@ -39,8 +36,4 @@ public class KamalKafaConfiguration {
 		return new KafkaTemplate<String, String>(producerFactory());
 	}
 
-	@Bean
-	public boolean isBlockDemand() {
-		return blockDemand;
-	}
 }

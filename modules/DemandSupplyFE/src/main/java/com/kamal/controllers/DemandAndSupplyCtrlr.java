@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.kamal.configs.KamalKafaConfiguration;
+import com.kamal.configs.PropertyConfiguration;
 import com.kamal.domain.Demand;
 import com.kamal.domain.Profile;
 import com.kamal.domain.Supply;
@@ -31,12 +32,12 @@ public class DemandAndSupplyCtrlr {
 	private ProfilesServiceProxy profProxy;
 
 	@Autowired
-	private KamalKafaConfiguration kafkaConfig;
+	private PropertyConfiguration propertyConfiguration;
 
 	@PostMapping(path = "/demand")
 	public String postDemand(@RequestBody Demand demand) {
 		String retValue = null;
-		if (!kafkaConfig.isBlockDemand()) {
+		if (!propertyConfiguration.isBlockDemand()) {
 			long id = demand.getRider_id();
 			Map<String, Long> uriVariables = new HashMap<String, Long>();
 			uriVariables.put("id", id);
@@ -64,7 +65,7 @@ public class DemandAndSupplyCtrlr {
 	@PostMapping(path = "/demandfeign")
 	public String postDemandFeign(@RequestBody Demand demand) {
 		String retValue = null;
-		if (!kafkaConfig.isBlockDemand()) {
+		if (!propertyConfiguration.isBlockDemand()) {
 			long id = demand.getRider_id();
 			if (profProxy.findprofile(id) == null) {
 				retValue = "user id <" + demand.getRider_id() + "> not found";
