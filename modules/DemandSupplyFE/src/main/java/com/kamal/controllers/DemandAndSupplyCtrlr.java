@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,26 +28,33 @@ public class DemandAndSupplyCtrlr {
 	@Autowired
 	private ProfilesServiceProxy profProxy;
 
+	@Value("{block.demands}")
+	private boolean blockDemand = false;
+
 	@PostMapping(path = "/demand")
 	public String postDemand(@RequestBody Demand demand) {
 		String retValue = null;
-		long id = demand.getRider_id();
-		Map<String, Long> uriVariables = new HashMap<String, Long>();
-		uriVariables.put("id", id);
+		if (!blockDemand) {
+			long id = demand.getRider_id();
+			Map<String, Long> uriVariables = new HashMap<String, Long>();
+			uriVariables.put("id", id);
 
-		ResponseEntity<Profile> responseEntity = new RestTemplate()
-				.postForEntity("http://master:6071/profiles/findid/" + id, null, Profile.class);
+			ResponseEntity<Profile> responseEntity = new RestTemplate()
+					.postForEntity("http://master:6071/profiles/findid/" + id, null, Profile.class);
 
-		Profile response = responseEntity.getBody();
-		if (response == null || (response != null && response.getId() <= 0)) {
-			retValue = "user id <" + demand.getRider_id() + "> not found";
+			Profile response = responseEntity.getBody();
+			if (response == null || (response != null && response.getId() <= 0)) {
+				retValue = "user id <" + demand.getRider_id() + "> not found";
+			} else {
+				Gson gson = new Gson();
+				producer.sendDemandMessage(gson.toJson(demand));
+				retValue = "posted-demand";
+			}
+			if (profProxy.findprofile(id) != null) {
+				System.out.println("adasmbdsam");
+			}
 		} else {
-			Gson gson = new Gson();
-			producer.sendDemandMessage(gson.toJson(demand));
-			retValue = "posted-demand";
-		}
-		if (profProxy.findprofile(id) != null) {
-			System.out.println("adasmbdsam");
+			retValue = "Sorry request cannot be posted at this moment";
 		}
 		return retValue;
 	}
