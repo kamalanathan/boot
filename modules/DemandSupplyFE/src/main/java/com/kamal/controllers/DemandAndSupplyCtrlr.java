@@ -18,6 +18,7 @@ import com.kamal.domain.Profile;
 import com.kamal.domain.Supply;
 import com.kamal.kafka.Producer;
 import com.kamal.service.ProfilesServiceProxy;
+import com.kamal.service.ProfilesServiceProxyNoZuul;
 
 @RestController
 @RequestMapping(path = "/cars")
@@ -30,6 +31,9 @@ public class DemandAndSupplyCtrlr {
 
 	@Autowired
 	PropertyConfiguration propertyConfiguration;
+
+	@Autowired
+	private ProfilesServiceProxyNoZuul profilesServiceProxyNoZuul;
 
 	@PostMapping(path = "/demand")
 	public String postDemand(@RequestBody Demand demand) {
@@ -61,6 +65,42 @@ public class DemandAndSupplyCtrlr {
 
 	@PostMapping(path = "/demandfeign")
 	public String postDemandFeign(@RequestBody Demand demand) {
+		String retValue = null;
+		if (!propertyConfiguration.isPropertyConfiguration()) {
+			long id = demand.getRider_id();
+			if (profProxy.findprofile(id) == null) {
+				retValue = "user id <" + demand.getRider_id() + "> not found";
+			} else {
+				Gson gson = new Gson();
+				producer.sendDemandMessage(gson.toJson(demand));
+				retValue = "posted-demand";
+			}
+		} else {
+			retValue = "Sorry request cannot be posted at this moment";
+		}
+		return retValue;
+	}
+
+	@PostMapping(path = "/demandallzuul")
+	public String postDemandAllZuul(@RequestBody Demand demand) {
+		String retValue = null;
+		if (!propertyConfiguration.isPropertyConfiguration()) {
+			long id = demand.getRider_id();
+			if (profilesServiceProxyNoZuul.findprofile(id) == null) {
+				retValue = "user id <" + demand.getRider_id() + "> not found";
+			} else {
+				Gson gson = new Gson();
+				producer.sendDemandMessage(gson.toJson(demand));
+				retValue = "posted-demand";
+			}
+		} else {
+			retValue = "Sorry request cannot be posted at this moment";
+		}
+		return retValue;
+	}
+
+	@PostMapping(path = "/demandallfezuul")
+	public String postDemandFEZuul(@RequestBody Demand demand) {
 		String retValue = null;
 		if (!propertyConfiguration.isPropertyConfiguration()) {
 			long id = demand.getRider_id();
