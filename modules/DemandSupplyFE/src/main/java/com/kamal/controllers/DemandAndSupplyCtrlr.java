@@ -81,7 +81,7 @@ public class DemandAndSupplyCtrlr {
 		return retValue;
 	}
 
-	@PostMapping(path = "/demandallzuul")
+	@PostMapping(path = "/demandallfezuul")
 	public String postDemandAllZuul(@RequestBody Demand demand) {
 		String retValue = null;
 		if (!propertyConfiguration.isPropertyConfiguration()) {
@@ -99,7 +99,7 @@ public class DemandAndSupplyCtrlr {
 		return retValue;
 	}
 
-	@PostMapping(path = "/demandallfezuul")
+	@PostMapping(path = "/demandallzuul")
 	public String postDemandFEZuul(@RequestBody Demand demand) {
 		String retValue = null;
 		if (!propertyConfiguration.isPropertyConfiguration()) {
