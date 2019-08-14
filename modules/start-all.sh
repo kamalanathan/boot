@@ -1,19 +1,4 @@
-cd ./eurekaserver
 mvn clean install
-cd ./cloud-config
-mvn clean install
-cd ./matcher
-mvn clean install
-cd ./DemandSupplyFE
-mvn clean install
-cd ./profiles
-mvn clean install
-cd ./zuulfilter
-mvn clean install
-cd ./offers
-mvn clean install
-cd ..
-
 
 scp ./profiles/target/*.jar kamal@slave02:/home/kamal/Documents/workspace/profiles
 scp ./profiles/target/*.jar kamal@slave04:/home/kamal/Documents/workspace/profiles 

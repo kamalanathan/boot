@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>comkamal</groupId>
+	<artifactId>springboot-gettingstarted</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>springboot-gettingstarted</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+	</properties>
+	<modules>
+		<module>eurekaserver</module>
+		<module>cloud-config</module>
+		<module>profiles</module>
+		<module>offers</module>
+		<module>matcher</module>
+		<module>DemandSupplyFE</module>
+		<module>zuulfilter</module>
+		<module>oauth2</module>
+	</modules>
+
+</project>
