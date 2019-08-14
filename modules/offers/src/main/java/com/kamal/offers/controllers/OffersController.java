@@ -13,7 +13,7 @@ import com.kamal.offers.domain.Offers;
 import com.kamal.offers.repository.OffersRepository;
 
 @RestController
-@RequestMapping("offers")
+@RequestMapping("/offers")
 public class OffersController {
 
 	@Autowired
@@ -24,7 +24,7 @@ public class OffersController {
 		return repo.findAll();
 	}
 
-	@PostMapping("/createofers")
+	@PostMapping("/createoffers")
 	public void createOffers(@RequestBody Offers offers) {
 		repo.insert(offers);
 	}

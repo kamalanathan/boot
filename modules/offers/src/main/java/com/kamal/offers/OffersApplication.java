@@ -1,24 +1,23 @@
-package com.kamal.zuulfilter;
+package com.kamal.offers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import brave.sampler.Sampler;
 
-@EnableZuulProxy
-@EnableDiscoveryClient
 @SpringBootApplication
-public class ZuulfilterApplication {
-
+@EnableDiscoveryClient
+@ComponentScan(basePackages = "com.kamal")
+public class OffersApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ZuulfilterApplication.class, args);
+		SpringApplication.run(OffersApplication.class, args);
 	}
 
 	@Bean
 	public Sampler defaultSampler() {
-		return Sampler.ALWAYS_SAMPLE;
+		return Sampler.NEVER_SAMPLE;
 	}
 }

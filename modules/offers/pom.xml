@@ -134,7 +134,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<fork>true</fork>
-					<mainClass>com.kamal.profiles.ProfilesApplication</mainClass>
+					<mainClass>com.kamal.offers.OffersApplication</mainClass>
 					<addResources>true</addResources>
 					<executable>true</executable>
 				</configuration>

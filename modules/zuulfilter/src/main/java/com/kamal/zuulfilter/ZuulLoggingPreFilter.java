@@ -20,7 +20,6 @@ public class ZuulLoggingPreFilter extends ZuulFilter {
 
 	@Override
 	public Object run() throws ZuulException {
-		System.out.println("run");
 		HttpServletRequest httpServletRequest = RequestContext.getCurrentContext().getRequest();
 		log.info("request -> {}, request uri -> {}", httpServletRequest, httpServletRequest.getRequestURI());
 
@@ -35,19 +34,19 @@ public class ZuulLoggingPreFilter extends ZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
-		System.out.println("shouldFilter");
+		log.debug("shouldFilter");
 		return true;
 	}
 
 	@Override
 	public int filterOrder() {
-		System.out.println("filterOrder");
+		log.debug("filterOrder");
 		return 1;
 	}
 
 	@Override
 	public String filterType() {
-		System.out.println("filtertype");
+		log.debug("filtertype");
 		return "pre";
 	}
 
