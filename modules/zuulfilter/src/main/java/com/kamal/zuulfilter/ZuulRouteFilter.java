@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -30,6 +31,7 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.ProxyRequestHelper;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -183,6 +185,34 @@ public class ZuulRouteFilter extends ZuulFilter {
 			}
 		}
 		return list.toArray(new BasicHeader[0]);
+	}
+
+	public MultiValueMap<String, String> buildZuulRequestHeaders(HttpServletRequest request) {
+		RequestContext context = RequestContext.getCurrentContext();
+		MultiValueMap<String, String> headers = new HttpHeaders();
+		Enumeration<String> headerNames = request.getHeaderNames();
+		if (headerNames != null) {
+			while (headerNames.hasMoreElements()) {
+				String name = headerNames.nextElement();
+				// if (isIncludedHeader(name)) {
+				Enumeration<String> values = request.getHeaders(name);
+				while (values.hasMoreElements()) {
+					String value = values.nextElement();
+					headers.add(name, value);
+				}
+				// }
+			}
+		}
+		Map<String, String> zuulRequestHeaders = context.getZuulRequestHeaders();
+		for (String header : zuulRequestHeaders.keySet()) {
+			// if (isIncludedHeader(header)) {
+			headers.set(header, zuulRequestHeaders.get(header));
+			// }
+		}
+		if (!headers.containsKey(HttpHeaders.ACCEPT_ENCODING)) {
+			headers.set(HttpHeaders.ACCEPT_ENCODING, "gzip");
+		}
+		return headers;
 	}
 
 	private void forwardToSpecialRoute(String route) {
