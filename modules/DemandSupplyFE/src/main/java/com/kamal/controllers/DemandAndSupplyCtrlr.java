@@ -152,4 +152,10 @@ public class DemandAndSupplyCtrlr {
 		return retValue;
 	}
 
+	@PostMapping(path = "/demandallfezuul2")
+	public String postDemandAllZuul2(@RequestBody Demand demand) {
+		String retValue = null;
+		retValue = "Sorry request cannot be posted at this moment";
+		return retValue;
+	}
 }
