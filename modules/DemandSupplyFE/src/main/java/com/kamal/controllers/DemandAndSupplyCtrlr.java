@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -156,6 +157,13 @@ public class DemandAndSupplyCtrlr {
 	public String postDemandAllZuul2(@RequestBody Demand demand) {
 		String retValue = null;
 		retValue = "Sorry request cannot be posted at this moment";
+		return retValue;
+	}
+
+	@GetMapping(path = "/test")
+	public String postDemandAllZuul2() {
+		String retValue = null;
+		retValue = "test api";
 		return retValue;
 	}
 }
