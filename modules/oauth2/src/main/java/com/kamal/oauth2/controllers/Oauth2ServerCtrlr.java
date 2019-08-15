@@ -15,6 +15,9 @@ public class Oauth2ServerCtrlr {
 		Map<String, Object> userInfo = new HashMap<>();
 		userInfo.put("user", user.getUserAuthentication().getPrincipal());
 		userInfo.put("authorities", AuthorityUtils.authorityListToSet(user.getUserAuthentication().getAuthorities()));
+		userInfo.put("authorities1", (user.getUserAuthentication().getDetails()));
+		userInfo.put("authorities2", (user.getUserAuthentication().getName()));
+		userInfo.put("authorities3", (user.getUserAuthentication().getPrincipal()));
 		return userInfo;
 	}
 }
