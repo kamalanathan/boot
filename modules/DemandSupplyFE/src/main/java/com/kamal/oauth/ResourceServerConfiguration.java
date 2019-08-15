@@ -9,7 +9,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().hasAnyRole("ADMIN", "ROLE_USER");
+		http.authorizeRequests().anyRequest().authenticated();
 		// .authenticated();
 		// http.authorizeRequests().antMatchers(HttpMethod.DELETE,
 		// "/v1/organizations/**").hasRole("ADMIN").anyRequest()

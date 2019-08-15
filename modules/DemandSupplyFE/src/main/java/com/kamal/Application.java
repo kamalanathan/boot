@@ -1,7 +1,5 @@
 package com.kamal;
 
-import javax.servlet.Filter;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -9,8 +7,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-
-import com.kamal.oauth.UserContextFilter;
 
 import brave.sampler.Sampler;
 
