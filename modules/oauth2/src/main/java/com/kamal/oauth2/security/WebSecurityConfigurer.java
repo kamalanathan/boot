@@ -1,4 +1,4 @@
-package com.kamal.oauth2.controllers;
+package com.kamal.oauth2.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,12 +1,13 @@
-package com.kamal.oauth2.controllers;
+package com.kamal.oauth2.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @Component
 @Configuration
 public class ServiceConfig {
-//	@Value("${signing.key}")
+	@Value("${signing.key}")
 	private String jwtSigningKey = "";
 
 	public String getJwtSigningKey() {

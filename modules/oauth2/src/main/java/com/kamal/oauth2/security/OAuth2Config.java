@@ -1,4 +1,4 @@
-package com.kamal.oauth2.controllers;
+package com.kamal.oauth2.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
