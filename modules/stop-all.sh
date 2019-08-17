@@ -20,4 +20,5 @@ curl -X POST http://slave04:6074/actuator/shutdown
 curl -X POST http://master:6072/actuator/shutdown
 #eurekaserver
 curl -X POST http://master:6070/actuator/shutdown
+#oauth2
 curl -X POST http://master:6075/actuator/shutdown
