@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eurekaserver
+  labels:
+    app: eurekaserver-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: eurekaserver-app
+  template:
+    metadata:
+      labels:
+        app: eurekaserver-app
+    spec:
+      containers:
+      - name: eurekaserver-container
+        image: kamalanathanv/spring-microservices-gettingstarted:docker-eurekaserver
+        ports:
+        - containerPort: 6070

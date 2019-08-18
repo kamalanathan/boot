@@ -281,3 +281,14 @@ docker login docker.io
 docker tag 78377906484b kamalanathanv/spring-microservices-gettingstarted:docker-eurekaserver
 docker push  kamalanathanv/spring-microservices-gettingstarted
 
+kubectl run --generator=run-pod/v1 eurekaserver --image=kamalanathanv/spring-microservices-gettingstarted:docker-eurekaserver
+kubectl describe pod eurekaserver
+kubectl delete pod eurekaserver
+
+kubectl get deployments
+ kubectl get pods
+
+kubectl create -f ./eurekaserverpod.yml
+
+
+

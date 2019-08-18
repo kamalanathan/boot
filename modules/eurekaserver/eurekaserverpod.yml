@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: eurekaserver
+    labels:
+        app: eurekaserver
+spec:
+    #replicas: 2
+    containers:
+    -   name: eurekaserver
+        image: kamalanathanv/spring-microservices-gettingstarted:docker-eurekaserver
+        ports:
+        -   containerPort: 6070
