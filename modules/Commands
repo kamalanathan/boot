@@ -259,4 +259,25 @@ kubectl get nodes
 
 
 
-sudo docker images
+docker ps
+docker inspect <container ID>
+docker inspect <container id> | grep "IPAddress"
+
+docker exec -it elegant_hermann /bin/bash
+docker exec -it <container name> <command>
+
+How do I run a command in my container?
+The proper way to run a command in a container is: docker-compose run <container name> <command>. For example, to get a shell into your web container you might run docker-compose run web /bin/bash
+
+To run a series of commands, you must wrap them in a single command using a shell. For example: docker-compose run 
+<name in yml> sh -c '<command 1> && <command 2> && <command 3>'
+
+In some cases you may want to run a container that is not defined by a docker-compose.yml file, for example to test a new container configuration. Use docker run to start a new container with a given image: docker run -it <image name> <command>
+
+The docker run command accepts command line options to specify volume mounts, environment variables, the working directory, and more.
+
+
+docker login docker.io
+docker tag 78377906484b kamalanathanv/spring-microservices-gettingstarted:docker-eurekaserver
+docker push  kamalanathanv/spring-microservices-gettingstarted
+
