@@ -17,8 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class UserContextFilter implements Filter {
-
-	@Override
+	// @Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
 
@@ -34,11 +33,11 @@ public class UserContextFilter implements Filter {
 		filterChain.doFilter(httpServletRequest, servletResponse);
 	}
 
-	@Override
+	// @Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}
 
-	@Override
+	// @Override
 	public void destroy() {
 	}
 }

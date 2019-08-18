@@ -1,0 +1,262 @@
+
+// replication strategies
+// SimpleStrategy Use only for a single datacenter and one rack. If you ever intend more than one datacenter, use the NetworkTopologyStrategy.
+// NetworkTopologyStrategy Highly recommended for most deployments because it is much easier to expand to multiple datacenters 
+// when required by future expansion.
+//
+Read Operation
+There are three types of read requests that a coordinator sends to replicas.
+
+Direct request
+Digest request
+Read repair request
+// monitoring options
+// partitioning thed data in cassandra tables
+// cassandra client is not shuting down!  
+check this https://docs.datastax.com/en/developer/java-driver/2.1/manual/object_mapper/creating/ 
+
+ALTER KEYSPACE KAMALS_KEYSPACE WITH REPLICATION =
+  {'class' : 'NetworkTopologyStrategy', 'SearchAnalytics' : 3};
+
+drop keyspace KAMALS_KEYSPACE;
+
+CREATE KEYSPACE KAMALS_KEYSPACE WITH replication = {'class' : 'NetworkTopologyStrategy','dc1' :3};   
+
+use KAMALS_KEYSPACE;
+
+CREATE TABLE KAMALS_KEYSPACE.FL_Insurance (
+  policyID           bigint,
+  statecode          text,
+  county             text,
+  eq_site_limit      double,
+  hu_site_limit      double,
+  fl_site_limit      double,
+  fr_site_limit      double,
+  tiv_2011           double,
+  tiv_2012           double,
+  eq_site_deductible double,
+  hu_site_deductible double,
+  fl_site_deductible double,
+  fr_site_deductible double,
+  point_latitude     double,
+  point_longitude    double,
+  line               text,
+  construction       text,
+  point_granularity  Int,
+  PRIMARY KEY ((statecode,county),policyID,line,construction)
+);
+
+ describe kamals_keyspace;
+ 
+ EXPAND ON;
+ //consistency levels 
+ // into bloom filter
+ // tombstones - timestamp
+ // idempotent 
+ // vnodes
+ // compaction strategy
+ // cassandra read a head
+ // java native access JNA
+ // partitioner
+ // stress testing
+ // cassandra tweaking
+ 
+ //What are the Different types of Data Model?
+ // Single Primary Key
+// Compound Primary Key
+// Composite Partitioning Key
+
+// scala type bounds
+
+kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic wonderful
+
+kafka-topics.sh --zookeeper master:2181,slave02:2181,slave04:2181 --delete --topic supplytopic
+
+sudo mount -t vboxsf share /mnt/myshare
+
+sudo apt-get install virtualbox-guest-utils
+
+tar -xvzf community_images.tar.gz
+
+ip a
+
+ipconfig /all | findstr /R "DNS\ Servers"
+
+VBoxManage natnetwork modify -t nat-int-network -h on
+
+https://www.thomas-krenn.com/en/wiki/Network_Configuration_in_VirtualBox
+
+https://www.the-future-group.com/2016/09/setting-up-a-nat-network-virtualbox-5/
+
+VBoxManage dhcpserver add --netname NatNetwork --ip 10.216.152.90 --lowerip 10.216.152.2 --upperip 10.216.152.24 --netmask 255.255.255.0
+
+VBoxManage dhcpserver add --ifname vboxnet0 --ip 172.16.0.3 --lowerip 172.16.10.1 --upperip 172.16.10.254 --netmask 255.240.0.0 
+VBoxManage dhcpserver modify --ifname vboxnet0 --enable
+
+
+https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc732103(v=ws.10)
+https://www.youtube.com/watch?v=eAnyGQ2Gv8U
+https://www.windowscentral.com/how-set-and-manage-network-bridge-connection-windows-10
+
+C:\Windows\System32
+gpedit.msc
+ncpa.cpl
+
+https://www.eandbsoftware.org/virtualbox-fix-vt-x-is-not-available-verr_vmx_no_vmx/
+
+https://weblogs.asp.net/dixin/run-hyper-v-and-vmware-virtual-machines-on-windows-10
+
+./cqlsh 192.168.1.5 --request-timeout=6000000
+
+
+CREATE USER kamal WITH PASSWORD 'kamal';
+CREATE USER akers WITH PASSWORD 'Niner2' SUPERUSER;
+CREATE USER boone WITH PASSWORD 'Niner75' NOSUPERUSER;
+
+CREATE ROLE keyspace_admin;
+GRANT ALL PERMISSIONS ON ALL KEYSPACES TO keyspace_admin;
+GRANT keyspace_admin to kamal;
+
+admin/7005719424
+
+
+sudo rm -rf /var/lib/cassandra
+sudo rm -rf /var/log/cassandra
+sudo rm -rf /var/lib/dsefs
+
+sudo rm -rf /var/lib/dsefs
+  sudo rm -rf /var/lib/spark
+  sudo rm -rf /var/log/spark
+  sudo rm -rf /var/lib/spark/rdd
+  sudo rm -rf /var/log/spark/master
+  sudo rm -rf /var/log/spark/alwayson_sql
+  sudo rm -rf /var/lib/spark/worker
+
+
+sudo mkdir -p /var/lib/cassandra
+sudo chown -R  $USER:$GROUP /var/lib/cassandra
+sudo mkdir -p /var/log/cassandra
+sudo chown -R  $USER:$GROUP /var/log/cassandra
+sudo mkdir -p /var/lib/dsefs
+sudo chown -R  $USER:$GROUP /var/lib/dsefs
+
+sudo mkdir -p /var/lib/dsefs
+ sudo chown -R $USER:$GROUP /var/lib/dsefs
+  sudo mkdir -p /var/lib/spark
+ sudo chown -R $USER:$GROUP /var/lib/spark
+  sudo mkdir -p /var/log/spark
+ sudo chown -R $USER:$GROUP /var/log/spark
+  sudo mkdir -p /var/lib/spark/rdd
+ sudo chown -R $USER:$GROUP /var/lib/spark/rdd
+  sudo mkdir -p /var/log/spark/master
+ sudo chown -R $USER:$GROUP /var/log/spark/master
+  sudo mkdir -p /var/log/spark/alwayson_sql
+ sudo chown -R $USER:$GROUP /var/log/spark/alwayson_sql
+  sudo mkdir -p /var/lib/spark/worker
+ sudo chown -R $USER:$GROUP /var/lib/spark/worker
+
+
+CREATE TABLE KAMALS_KEYSPACE.cabs (
+  driver_id           bigint,
+  name       	   text,
+  phonenumber             text,
+  latitude      double,
+  longitude      double,
+  PRIMARY KEY (driver_id)
+);
+
+CREATE TABLE KAMALS_KEYSPACE.rider (
+  rider_id       bigint,
+  name           text,
+  phonenumber    text,
+  latitude       double,
+  longitude      double,
+  PRIMARY KEY (rider_id)
+);
+
+
+./kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 3 --partitions 10 --topic test
+
+./kafka-console-consumer.sh --from-beginning --topic supplytopiccars --bootstrap-server master:9092
+
+./kafka-console-consumer.sh --from-beginning --topic demandtopic --bootstrap-server master:9092
+
+
+
+CREATE TABLE KAMALS_KEYSPACE.profiles (
+  id bigint,
+  firstname text,
+  lastname text,
+  phonenumber text,
+  username text,
+  password text,
+  emailid text,
+  isblocked text,
+  isactive text,
+  PRIMARY KEY (id)
+);
+
+
+CREATE TABLE KAMALS_KEYSPACE.offers (
+  id bigint,
+  offername text,
+  offertype text,
+  offerdiscountrate double,
+  offernumberofridesallowed int,
+  offerfortypeofuser text,
+  PRIMARY KEY (id)
+);
+
+gnome-desktop-item-edit --create-new ~/Desktop
+
+http://master:6068/actuator/metrics
+
+git add -A
+git commit -m "my changes"
+git push --all
+
+
+http://master:15672 admin password
+
+
+
+· Facilitate the design of the architecture of these distributed and highly scalable systems.
+· Coach, mentor and develop some of the most smartest engineers in the world.
+· Solve complex problems through data, rapidly.
+· Design and develop state of the art software systems that address these complex and ambiguous problems.
+· Own the inputs and the business outcome through cultivating a culture of relentless auditing and metric monitoring, automatically where possible.
+
+
+kamalanathanv/crack_it_001
+
+
+
+To start using your cluster, you need to run the following as a regular user:
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+sudo kubeadm reset
+sudo rm -rf /etc/kubernetes/
+
+kubeadm reset
+sudo swapoff -a
+sudo kubeadm join 192.168.1.3:6443 --token 3egds5.trm6e5hz6b7d6ckk --discovery-token-ca-cert-hash sha256:ec9e323822b0391b18495360299db6340618618fc3a2f2642ee9751205092738
+
+kubectl drain slave04 --delete-local-data --force --ignore-daemonsets
+kubectl delete node slave04
+
+kubectl get nodes
+
+
+
+sudo docker images
