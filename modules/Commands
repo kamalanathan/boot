@@ -325,3 +325,13 @@ kubectl delete sa kubernetes-dashboard --namespace=kubernetes-dashboard
 kubectl delete secret kubernetes-dashboard-certs --namespace=kubernetes-dashboard
 kubectl delete secret kubernetes-dashboard-key-holder --namespace=kubernetes-dashboard
 
+Kubectl create -f https://k8s.io/examples/application/shell-demo.yaml
+
+kubectl exec -it shell-demo -- /bin/bash
+
+apt-get update
+apt-get install busybox -y
+
+busybox nslookup nginxsvc	
+
+

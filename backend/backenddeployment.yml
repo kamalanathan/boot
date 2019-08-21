@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: restbackend1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: restbackend2
+  template:
+    metadata:
+      labels:
+        app: restbackend2
+    spec:
+      containers:
+      - name: backend
+        image: kamalanathanv/restbackend:latest
+        ports:
+        - containerPort: 6072
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: restbackend-service
+spec: 
+  selector: 
+    app: restbackend2
+  ports:
+    - name: web
+      port: 6072
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: restbackend-service2
+spec: 
+  selector: 
+    app: restbackend2
+  ports:
+    - name: web
+      port: 6072
+  type: ClusterIP

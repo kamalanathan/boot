@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: restfrontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: restfrontend
+  template:
+    metadata:
+      labels:
+        app: restfrontend
+    spec:
+      containers:
+      - name: frontend
+        image: kamalanathanv/restfrontend:latest
+        ports:
+        - containerPort: 6071
+        imagePullPolicy: Always
+      dnsConfig:
+        nameservers:
+          - 10.96.0.10
