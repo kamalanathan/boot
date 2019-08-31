@@ -42,9 +42,24 @@ public class UniqueSubsets {
 
 		for (int i = start; i < arr.length; i++) {
 			arrayList.add(arr[i]);
-			generateSubsets2(arr, k, arrayList, i + 1);
+			generateSubsets3(arr, k, arrayList, i + 1);
 			arrayList.remove(new Integer(arr[i]));
 		}
+	}
+
+	public static void generateSubsets4(int[] arr, int k, ArrayList<Integer> arrayList, int start) {
+		if (arrayList.size() == k) {
+			System.out.println(Arrays.toString(arrayList.toArray()));
+			return;
+		}
+
+		if (start == arr.length) {
+			return;
+		}
+		arrayList.add(arr[start]);
+		generateSubsets4(arr, k, arrayList, start + 1);
+		arrayList.remove(new Integer(arr[start]));
+		generateSubsets4(arr, k, arrayList, start + 1);
 	}
 
 	public static void main(String[] args) {
@@ -61,5 +76,9 @@ public class UniqueSubsets {
 		System.out.println();
 		integers2 = new ArrayList<>();
 		generateSubsets3(arr, k, integers2, 0);
+		System.out.println();
+		System.out.println();
+		integers2 = new ArrayList<>();
+		generateSubsets4(arr, k, integers2, 0);
 	}
 }
