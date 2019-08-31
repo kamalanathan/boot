@@ -11,6 +11,7 @@ package com.kamal.dp;
 // try with Autoclosable
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
 import com.kamal.dp.Query.Argument;
@@ -161,5 +162,6 @@ public class BrokerChain {
 		System.out.println(goblin);
 		dam.close();
 		System.out.println(goblin);
+		ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
 	}
 }
