@@ -334,4 +334,4 @@ apt-get install busybox -y
 
 busybox nslookup nginxsvc	
 
-
+docker rmi $(docker images -a -q)

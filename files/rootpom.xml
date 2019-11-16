@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.1.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.ey.e2s</groupId>
+	<artifactId>e2smodules</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<properties>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<springfox-version>2.7.0</springfox-version>
+		<jackson-datatype-threetenbp-version>2.7.0</jackson-datatype-threetenbp-version>
+		<poi-ooxml>3.8-beta4</poi-ooxml>
+		<aspose-cells>17.9</aspose-cells>
+		<shedlock-spring>2.1.0</shedlock-spring>
+		<spring-cloud-starter-sleuth.version>2.1.5.RELEASE</spring-cloud-starter-sleuth.version>
+		<mssql-jdbc>7.0.0.jre8</mssql-jdbc>
+		<guava>28.0-jre</guava>
+		<gson>2.8.6</gson>
+		<commons-collections4>4.0</commons-collections4>
+		<shedlock-provider-jdbc-template>2.1.0</shedlock-provider-jdbc-template>
+		<gson>2.8.0</gson>
+		<docker-repository>kamalanathanv/einvoice</docker-repository>
+		<docker-registry-url>https://registry-1.docker.io/v2/</docker-registry-url>
+		<docker-serverId>docker-hub</docker-serverId>
+		<docker.skip>true</docker.skip>
+	</properties>
+	<!--repositories> <repository> <id>AsposeJavaAPI</id> <name>Aspose Java 
+		API</name> <url>http://maven.aspose.com/artifactory/simple/ext-release-local/</url> 
+		</repository> </repositories -->
+	<modules>
+		<module>e2scommons</module>
+		<module>e2sinputdatamodel</module>
+		<module>e2sdataaccessmediator</module>
+		<module>e2ssqldataaccess</module>
+		<module>datafilehandler</module>
+		<module>e2scoreengine</module>
+		<module>e2seycore</module>
+		<module>e2sasyncjobhandlers</module>
+		<module>e2sasyncexec</module>
+		<module>e2s_app</module>
+		<module>globaltest</module>
+	</modules>
+</project>
